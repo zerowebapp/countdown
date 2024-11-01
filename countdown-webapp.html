@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#1a365d">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Days Until May 19, 2025</title>
+    <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiQ291bnRkb3duIiwic2hvcnRfbmFtZSI6IkNvdW50ZG93biIsInN0YXJ0X3VybCI6Ii8iLCJkaXNwbGF5Ijoic3RhbmRhbG9uZSIsImJhY2tncm91bmRfY29sb3IiOiIjZmZmZmZmIiwidGhlbWVfY29sb3IiOiIjMWEzNjVkIn0=">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #f0f7ff 0%, #f5f3ff 100%);
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin: 1rem;
+            max-width: 90vw;
+        }
+
+        .title {
+            color: #666;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .date {
+            color: #2563eb;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+        }
+
+        .number {
+            color: #2563eb;
+            font-size: 5rem;
+            font-weight: bold;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .label {
+            color: #666;
+            font-size: 1.5rem;
+        }
+
+        .install-prompt {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: #666;
+            display: none;
+        }
+
+        @media (display-mode: browser) {
+            .install-prompt {
+                display: block;
+            }
+        }
+
+        /* iOS specific styles */
+        @supports (-webkit-touch-callout: none) {
+            body {
+                height: -webkit-fill-available;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">Days until</div>
+        <div class="date">May 19th, 2025</div>
+        <div class="number" id="days">0</div>
+        <div class="label" id="label">DAYS</div>
+        <div class="install-prompt">
+            📱 Add to home screen:<br>
+            • iOS: Share → Add to Home Screen<br>
+            • Android: Menu → Add to Home Screen
+        </div>
+    </div>
+
+    <script>
+        function updateCountdown() {
+            const targetDate = new Date('2025-05-19T00:00:00');
+            const now = new Date();
+            const difference = targetDate - now;
+            const days = Math.ceil(difference / (1000 * 60 * 60 * 24));
+            
+            document.getElementById('days').textContent = days;
+            document.getElementById('label').textContent = days === 1 ? 'DAY' : 'DAYS';
+        }
+
+        // Update immediately
+        updateCountdown();
+
+        // Update at midnight
+        function scheduleNextUpdate() {
+            const now = new Date();
+            const tomorrow = new Date(now);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            tomorrow.setHours(0, 0, 0, 0);
+            const timeUntilMidnight = tomorrow - now;
+
+            setTimeout(() => {
+                updateCountdown();
+                scheduleNextUpdate();
+            }, timeUntilMidnight);
+        }
+
+        scheduleNextUpdate();
+
+        // Register service worker for PWA
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js').catch(() => {
+                // Silently fail if service worker registration fails
+            });
+        }
+    </script>
+</body>
+</html>
