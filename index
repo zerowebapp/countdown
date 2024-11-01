@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Days Until May 19, 2025</title>
+    <style>
+        body {
+            font-family: -apple-system, system-ui, sans-serif;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #f0f7ff 0%, #f5f3ff 100%);
+        }
+        .container {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin: 20px;
+        }
+        .title { color: #666; font-size: 24px; }
+        .date { color: #2563eb; font-size: 24px; font-weight: bold; margin: 10px 0 20px 0; }
+        .number { color: #2563eb; font-size: 80px; font-weight: bold; line-height: 1; }
+        .label { color: #666; font-size: 24px; }
+        .install-note {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">Days until</div>
+        <div class="date">May 19th, 2025</div>
+        <div class="number" id="days">0</div>
+        <div class="label" id="label">DAYS</div>
+        <div class="install-note">
+            📱 Add to home screen:<br>
+            iOS: Share → Add to Home Screen<br>
+            Android: Menu → Add to Home Screen
+        </div>
+    </div>
+    <script>
+        function updateCountdown() {
+            const targetDate = new Date('2025-05-19T00:00:00');
+            const now = new Date();
+            const days = Math.ceil((targetDate - now) / (1000 * 60 * 60 * 24));
+            document.getElementById('days').textContent = days;
+            document.getElementById('label').textContent = days === 1 ? 'DAY' : 'DAYS';
+        }
+        updateCountdown();
+        setInterval(updateCountdown, 86400000);
+    </script>
+</body>
+</html>
